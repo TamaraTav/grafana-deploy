@@ -1,4 +1,5 @@
 # Grafana Deploy Project
+# <img width="1784" height="920" alt="Screenshot 2025-08-21 153504" src="https://github.com/user-attachments/assets/a2fc680a-af3f-46d6-ac1c-56447d01e718" />
 
 ## Load Testing (დატვირთვის ტესტირება)
 
