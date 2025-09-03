@@ -1,5 +1,82 @@
 # Grafana Deploy Project
+
 # <img width="1784" height="920" alt="Screenshot 2025-08-21 153504" src="https://github.com/user-attachments/assets/a2fc680a-af3f-46d6-ac1c-56447d01e718" />
+
+## Load Testing
+
+### Using Apache Bench (Linux/Mac):
+
+```bash
+ab -k -c 5 -n 20000 'http://localhost:8080/' & \
+ab -k -c 5 -n 2000 'http://localhost:8080/status/400' & \
+ab -k -c 5 -n 3000 'http://localhost:8080/status/409' & \
+ab -k -c 5 -n 5000 'http://localhost:8080/status/500' & \
+ab -k -c 50 -n 5000 'http://localhost:8080/status/200?seconds_sleep=1' & \
+ab -k -c 50 -n 2000 'http://localhost:8080/status/200?seconds_sleep=2'
+```
+
+### Using PowerShell (Windows):
+
+On Windows, you can use PowerShell script instead of Apache Bench:
+
+```powershell
+# Run the load testing script
+.\load-test.ps1
+```
+
+**Tests that are performed:**
+
+- **Test 1**: Root endpoint (20,000 requests)
+- **Test 2**: Status 400 (2,000 requests)
+- **Test 3**: Status 409 (3,000 requests)
+- **Test 4**: Status 500 (5,000 requests)
+- **Test 5**: Status 200 with 1s sleep (5,000 requests)
+- **Test 6**: Status 200 with 2s sleep (2,000 requests)
+
+## Running the Project:
+
+```bash
+# Start all services
+docker-compose up -d
+
+# Stop services
+docker-compose down
+```
+
+## Monitoring:
+
+- **Backend API**: http://localhost:8080
+- **Grafana**: http://localhost:3000 (admin/admin)
+- **Prometheus**: http://localhost:9090
+- **Loki**: http://localhost:3100
+- **API Documentation**: http://localhost:8080/docs
+
+## Monitoring Dashboards:
+
+In Grafana you can view:
+
+- **Total Requests**: Number of requests by endpoints
+- **Requests Average Duration**: Average duration of requests
+- **Request Per Sec**: Number of requests per second
+- **Request In Process**: Requests currently being processed
+- **Logs**: API logs in real-time
+
+## Dashboard Import:
+
+Log into Grafana with admin/admin and import the `/grafana/example-dashboard.json` file.
+
+## Load Testing Results:
+
+Load testing results will appear in real-time in Grafana, where you can view:
+
+- API performance metrics
+- Request processing speed
+- Error rates
+- Response times
+
+---
+
+# Grafana Deploy Project (ქართული)
 
 ## Load Testing (დატვირთვის ტესტირება)
 
